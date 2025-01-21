@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="..\static\js\tracker.js"></script>
+<!--ajax js-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!--Jquerry UI-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!--datatable-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+<!--BootStrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<div class="centerizeframe">
+    <div class="inputframe">
+        <!-- General Parameters (Common for all methods) -->
+        <div class="input_lef">
+            <label>Stock Code</label>
+            <input id="stock_code" type="text" value="TSLA">
+        </div>
+
+        <div class="input_lef">
+            <label>Start Date</label>
+            <input id="start_date" type="date" value="2021-01-01">
+        </div>
+
+        <!-- Select Method -->
+        <div class="input_lef">
+            <label for="method">Select Method</label>
+            <select id="method" onchange="showMethodParams()">
+                <option value="1" selected>Resistance Support Line</option>
+                <option value="2">KD Line</option>
+                <option value="3">MACD</option>
+                <option value="4">Bollinger Channel</option>
+                <option value="5">RSI</option>
+                <option value="6">ADX</option>
+                <option value="7">DMI</option>
+                <option value="8">K Line Status</option>
+            </select>
+        </div>
+
+        <!-- Dynamic Parameters Based on Method Selection -->
+
+        <!-- Resistance Support Line -->
+        <div id="res_sup_params" class="method_params">
+            <div class="input_lef">
+                <label>MA Length</label>
+                <input id="ma_length_res_sup" type="number" value="20">
+            </div>
+            <div class="input_lef">
+                <label>MA Mode</label>
+                <select id="ma_mode_res_sup">
+                    <option value="SMA" selected>Simple Moving Average</option>
+                    <option value="WMA">Weighted Moving Average</option>
+                </select>
+            </div>
+            <div class="input_lef">
+                <label>Method</label>
+                <select id="method_res_sup">
+                    <option value="1" selected>Method 1</option>
+                    <option value="2">Method 2</option>
+                    <option value="3">Method 3</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- KD Line -->
+        <div id="kd_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>MA Length</label>
+                <input id="ma_length_kd" type="number" value="20">
+            </div>
+        </div>
+
+        <!-- MACD -->
+        <div id="macd_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>Fast Period</label>
+                <input id="fastperiod_macd" type="number" value="12">
+            </div>
+            <div class="input_lef">
+                <label>Slow Period</label>
+                <input id="slowperiod_macd" type="number" value="26">
+            </div>
+            <div class="input_lef">
+                <label>Signal Period</label>
+                <input id="signalperiod_macd" type="number" value="9">
+            </div>
+        </div>
+
+        <!-- Bollinger Channel -->
+        <div id="bollinger_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>MA Length</label>
+                <input id="ma_length_bollinger" type="number" value="20">
+            </div>
+        </div>
+
+        <!-- RSI -->
+        <div id="rsi_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>Time Period</label>
+                <input id="timeperiod_rsi" type="number" value="14">
+            </div>
+        </div>
+
+        <!-- ADX -->
+        <div id="adx_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>Time Period</label>
+                <input id="timeperiod_adx" type="number" value="14">
+            </div>
+        </div>
+
+        <!-- DMI -->
+        <div id="dmi_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>Time Period</label>
+                <input id="timeperiod_dmi" type="number" value="14">
+            </div>
+        </div>
+
+        <!-- K Line Status -->
+        <div id="kline_status_params" class="method_params" hidden>
+            <div class="input_lef">
+                <label>Pattern</label>
+                <select id="pattern_kline">
+                    <option value="CDL3WHITESOLDIERS" >Three Advancing Soldiers</option>
+                    <option value="CDL3BLACKCROWS" >Three Black Crows</option>
+                    <option value="DOJI" >DOJI</option>
+                    <option value="CDLEVENINGSTAR">Evening Star</option>
+                    <option value="MORNINGSTAR" >Morning Star</option>
+                    <option value="HAMMER">Hammer</option>
+                    <option value="ENGULFING" selected>Engulfing</option>
+                    <option value="SHOOTINGSTAR">SHOOTINGSTAR</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+        <button id="submit_action" class="primary-btn">Submit</button>
+        <button id="reset_action" class="secondary-btn">Reset</button>
+        <button id="subscribe_action" class="subscribe-btn">Subscribe</button>
+    </div>
+</div>
+
+<p></p>
+{% include 'alerts.html' %}
+<p></p>
+
+<div class="sub_centerizeframe">
+    <!-- Placeholder for future charts or data -->
+    <div id="container_res_sup" hidden="true"></div>
+    <div id="container_kd" hidden="true"></div>
+    <!-- TODO: Please finish the container -->
+    <div id="container_macd" hidden="true"></div>
+    <div id="container_bollinger" hidden="true"></div>
+    <div id="container_rsi" hidden="true"></div>
+    <div id="container_adx" hidden="true"></div>
+    <div id="container_dmi" hidden="true"></div>
+    <div id="container_kline_status" hidden="true"></div>
+    </div>
+
+<!-- TODO: Please finish the container -->
+<script>
+    function showMethodParams() {
+        // Hide all method parameters initially
+        document.querySelectorAll('.method_params').forEach(param => param.hidden = true);
+        
+        // Show selected method parameters
+        const method = document.getElementById('method').value;
+        const paramDivs = {
+            '1': 'res_sup_params',
+            '2': 'kd_params',
+            '3': 'macd_params',
+            '4': 'bollinger_params',
+            '5': 'rsi_params',
+            '6': 'adx_params',
+            '7': 'dmi_params',
+            '8': 'kline_status_params'
+        };
+
+        if (paramDivs[method]) {
+            document.getElementById(paramDivs[method]).hidden = false;
+        }
+    }
+
+    // Call the function to display the correct parameters on page load
+    showMethodParams();
+</script>
+
+{% endblock %}

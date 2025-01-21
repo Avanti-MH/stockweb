@@ -1,0 +1,113 @@
+<!DOCTYPE html> <!-- templates/base.html -->
+<html>
+    <head>            
+        <meta charset="utf-8" />  
+        <title>Stock APP</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/stocktools/gui.css">
+        <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/annotations/popup.css">
+        <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+        
+        <script src="https://code.highcharts.com/modules/annotations-advanced.js"></script>
+        <script src="https://code.highcharts.com/modules/price-indicator.js"></script>
+        <script src="https://code.highcharts.com/modules/full-screen.js"></script>
+
+        <script src="https://code.highcharts.com/modules/stock-tools.js"></script>
+
+        <script src="https://code.highcharts.com/stock/modules/heikinashi.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+        <script src="https://code.highcharts.com/connectors/morningstar/connectors-morningstar.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="..\static\css\style.css">
+        <style>
+
+ 
+        </style>
+        <script type="text/javascript" src="..\static\js\home.js"></script>
+    </head>
+    <body>
+        <script>
+            csrf_token = "{{ csrf_token }}"
+        </script>
+
+        <header class="header_css">Stock APP</header>
+
+        <div class="centerizeframe">
+            <div class="d-flex gap-2 mb-3">
+                <a class="btn btn-outline-dark" href="distance_method" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"></path>
+                    </svg>
+                    Distance Method
+                </a>
+                <a class="btn btn-outline-dark" href="etf_rsi" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"></path>
+                    </svg>
+                    ETF RSI
+                </a>
+                <a class="btn btn-outline-dark" href="backtrader" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"></path>
+                    </svg>
+                    Backtrader
+                </a>
+                <a class="btn btn-outline-dark" href="pricing" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                        <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
+                      </svg>
+                    Pricing
+                </a>
+                <a class="btn btn-outline-dark" href="tracker" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x" viewBox="0 0 16 16">
+                        <path d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                      </svg>
+                    Tracker
+                </a>
+                <a role="button" id="home_btn" class="btn btn-outline-danger" href="http://127.0.0.1:8000/stockapp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"></path>
+                    </svg>
+                    Home
+                </a>
+                <!-- New User Action Button -->
+                <a role="button" class="btn btn-outline-primary" 
+                    href="{% if request.user.is_authenticated %} 
+                            http://127.0.0.1:7999/account/logout 
+                          {% else %} 
+                            http://127.0.0.1:7999/account/login 
+                          {% endif %}" 
+                    id="user-action-btn">
+                    {% if request.user.is_authenticated %}
+                        {{ request.user.username }}
+                    {% else %}
+                        Log In
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

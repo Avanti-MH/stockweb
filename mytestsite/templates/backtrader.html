@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="../static/js/backtrader.js"></script>
+
+<div class="centerizeframe">
+    <div class="inputframe">
+        <!-- General Parameters -->
+        <div class="input_lef">
+            <label>Stock Code</label>
+            <input id="stock_code" type="text" value="AAPL">
+        </div>
+
+        <div class="input_lef">
+            <label>Start Date</label>
+            <input id="start_date" type="date" value="2021-01-01">
+        </div>
+
+        <div class="input_lef">
+            <label>End Date</label>
+            <input id="end_date" type="date" value="2023-01-01">
+        </div>
+
+        <div class="input_lef">
+            <label>Initial Cash</label>
+            <input id="initial_cash" type="number" value="10000">
+        </div>
+
+        <!-- Select Strategy -->
+        <div class="input_lef">
+            <label for="strategy">Select Strategy</label>
+            <select id="strategy" onchange="showStrategyParams()">
+                <option value="rsi" selected>RSI Strategy</option>
+                <option value="sma">SMA Cross Strategy</option>
+            </select>
+        </div>
+
+        <!-- Strategy-Specific Parameters -->
+
+        <!-- RSI Strategy -->
+        <div id="rsi_params" class="strategy_params">
+            <div class="input_lef">
+                <label>RSI Period</label>
+                <input id="rsi_period" type="number" value="14">
+            </div>
+            <div class="input_lef">
+                <label>Overbought</label>
+                <input id="overbought" type="number" value="70">
+            </div>
+            <div class="input_lef">
+                <label>Oversold</label>
+                <input id="oversold" type="number" value="30">
+            </div>
+        </div>
+
+        <!-- SMA Strategy -->
+        <div id="sma_params" class="strategy_params" hidden>
+            <div class="input_lef">
+                <label>Fast Period</label>
+                <input id="fast_period" type="number" value="10">
+            </div>
+            <div class="input_lef">
+                <label>Slow Period</label>
+                <input id="slow_period" type="number" value="30">
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+        <button id="submit_action" class="primary-btn">Submit</button>
+    </div>
+</div>
+
+<script>
+    function showStrategyParams() {
+        document.querySelectorAll('.strategy_params').forEach(param => param.hidden = true);
+        const strategy = document.getElementById('strategy').value;
+        const paramDivs = {
+            'rsi': 'rsi_params',
+            'sma': 'sma_params',
+        };
+        if (paramDivs[strategy]) {
+            document.getElementById(paramDivs[strategy]).hidden = false;
+        }
+    }
+
+    showStrategyParams();
+</script>
+<!-- Result Section -->
+<div id="results" class="container mt-5" style="display: none;">
+    <h2>Backtest Results</h2>
+    <div id="result-data"></div>
+    <div id="result-image" class="mt-4"></div>
+</div>
+{% endblock %}

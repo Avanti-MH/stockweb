@@ -1,0 +1,66 @@
+<!-- myapp/templates/distance_method.html -->
+{% extends "base.html" %}
+
+        {% block content %}
+        <script type="text/javascript" src="..\static\js\etf_rsi.js"></script>
+        <div class="centerizeframe">
+            <div class="inputframe">
+                <div class="input_lef">
+                    <label>Stock</label>
+                    <input id="stock" type="text" value="0050.TW">
+                </div>
+                <div class="input_lef">
+                    <label>Start Date</label>
+                    <input id="start_date" type="date" value="2021-01-01">
+                </div>
+                <div class="input_rig">
+                    <label>Short-Term RSI</label>
+                    <input id="ShortRSI" type="number" value="5">
+                </div>
+                <div class="input_rig">
+                    <label>Strategy</label>
+                    <input id="strategy" type="text" value="RSI黃金交叉策略">
+                </div>
+                <div class="input_rig">
+                    <label>End Date</label>
+                    <input id="end_date" type="date" value="2024-01-01">
+                </div>
+                <div class="input_lef">
+                    <label>Long-Term RSI</label>
+                    <input id="LongRSI" type="number" value="20">
+                </div>
+
+            </div>
+            
+            <div class="button-group">
+                <button id="click_action" class="primary-btn">Send</button>
+                <button id="reset_action" class="secondary-btn">Reset</button>
+            </div>
+        </div>
+
+        <div class="chart_arrange">
+
+            <div id="container_profits" hidden="true"></div>
+            <div id="container_candle" hidden="true"></div>
+
+            <div>
+                <table id="container_Table" hidden="true">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Order Date</th>
+                            <th>Order Price</th>
+                            <th>Sell Date</th>
+                            <th>Sell Price</th>
+                            <th>Amount</th>
+                            <th>Profits</th>
+                            <th>Accumulation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {% endblock %}

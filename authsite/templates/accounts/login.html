@@ -1,0 +1,45 @@
+{% extends "../base.html" %}
+    {% block content %}
+        <!--ajax js-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!--Jquerry UI-->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <!--datatable-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+        <!--BootStrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <p></p>
+    {% include 'includes/alerts.html' %}
+    <p></p>
+        {% if request.user.is_authenticated %}
+
+        {% else %}
+        <div class="centerizeframe">
+            <h3>Login</h3>
+            <form action="/account/login" method="POST">
+                {% csrf_token %}
+                <div class="inputframe">
+                    <div>
+                        <label for="username">Username</label>
+                        <input id="username" name="username" type="text" placeholder="Enter your username" required />
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" placeholder="Enter your password" required />
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="primary-btn">Login</button>
+                    <button type="reset" class="secondary-btn">Reset</button>
+                    <button type="button" class="sign_up-btn" onclick="window.location.href='register'">Sign up</button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    {% endblock %}
+

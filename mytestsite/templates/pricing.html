@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <script type="text/javascript" src="..\static\js\pricing.js"></script>
+    
+    <div class="centerizeframe">
+        <div class="inputframe">
+            <div class="input_lef">
+                <label>Stock Code</label>
+                <input id="stock_code" type="text" value="2330.TW">
+            </div>
+            <div class="input_lef">
+                <label>Start Date</label>
+                <input id="start_date" type="date" value="2021-01-01">
+            </div>
+            <div class="input_lef">
+                <label>End Date</label>
+                <input id="end_date" type="date" value="2024-12-31">
+            </div>
+
+            <!-- River Chart Parameters -->
+            <div class="river-chart-params">
+                <label for="multipliers">River Chart:</label>
+                <div class="input_lef">
+                    <label for="time_frame">Select Time Frame</label>
+                    <select id="time_frame" value="1mo">
+                        <option value="1d">1 Day</option>
+                        <option value="1wk">1 Week</option>
+                        <option value="1mo" selected>1 Month</option>
+                        <option value="3mo">3 Months</option>
+                        <option value="1y">1 Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button id="submit_action" class="primary-btn">Submit</button>
+            <button id="reset_action" class="secondary-btn">Reset</button>
+        </div>
+    </div>
+
+    <div class="sub_centerizeframe">
+        <div id="river_candle_container" class="chart"></div>
+    </div>
+    <div id="grid_container" hidden="true">
+        <div class="grid-container-figure">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <figure class="highcharts-figure">
+                        <div id="container_dividend_price_method"></div>
+                    </figure>
+                </div>
+                <div class="grid-item">
+                    <figure class="highcharts-figure">
+                        <div id="container_high_low_price_method"></div>
+                    </figure>
+                </div>
+                <div class="grid-item">
+                    <figure class="highcharts-figure">
+                        <div id="container_pb_method"></div>
+                    </figure>
+                </div>
+                <div class="grid-item">
+                    <figure class="highcharts-figure">
+                        <div id="container_pe_method"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div>
+            <figure class="highcharts-figure">
+                <div id="container_river_chart_method"></div>
+            </figure>
+        </div>
+    
+    </div>
+    
+{% endblock %}

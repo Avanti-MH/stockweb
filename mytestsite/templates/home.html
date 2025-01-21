@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <div class="centerizeframe">
+        <table id="subscriptions-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>股票名稱</th>
+                    <th>訂閱日期</th>
+                    <th>功能</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be appended here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <div id="detail-container" class="sub_centerizeframe">
+        <!-- Detail tables will be dynamically appended here -->
+    </div>
+{% endblock %}
