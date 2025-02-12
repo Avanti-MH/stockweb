@@ -1,0 +1,50 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+# created-by: conda 24.9.2
+
+backtrader=1.9.78.123=pypi_0
+beautifulsoup4=4.12.3=pypi_0
+
+django=5.1.1=pypi_0
+django-cors-headers=4.6.0=pypi_0
+djangorestframework=3.15.2=pypi_0
+djangorestframework-simplejwt=5.3.1=pypi_0
+
+highcharts-core=1.9.4=pypi_0
+highcharts-gantt=1.7.0=pypi_0
+highcharts-maps=1.7.1=pypi_0
+highcharts-stock=1.7.0=pypi_0
+
+imageio=2.35.1=pypi_0
+
+libta-lib=0.4.0=hcfcfb64_2
+
+matplotlib=3.10.0=pypi_0
+
+mplfinance=0.12.10b0=pypi_0
+
+numpy=2.1.2=pypi_0
+opencv-python-headless=4.10.0.84=pypi_0
+
+pandas=2.2.3=pypi_0
+
+pillow=10.4.0=pypi_0
+pip=24.2=py312haa95532_0
+
+pysocks=1.7.1=pypi_0
+
+python=3.12.7=hce54a09_0_cpython
+python-bidi=0.6.0=pypi_0
+python-dateutil=2.9.0.post0=pypi_0
+
+selenium=4.25.0=pypi_0
+
+sqlite=3.45.3=h2bbff1b_0
+
+ta-lib=0.4.32=pypi_0
+
+twstock=1.4.0=pypi_0
+
+yfinance=0.2.44=pypi_0
+
